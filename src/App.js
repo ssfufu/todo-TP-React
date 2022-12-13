@@ -6,8 +6,12 @@ import { Button, Col, Row, Container, Card, Form, ListGroup, ListGroupItem} from
 export default function App(){
   const [todos, setTodos] = useState(JSON.parse(localStorage.getItem('todos')))
   return(
-    <Container >
-      <br/>
+    <Container
+      style={{
+        paddingTop: '2rem',
+        paddingBottom: '2rem'
+      }}
+    >
       <Card>
         <Card.Body>
             <Row className='mx-auto'>
@@ -16,6 +20,9 @@ export default function App(){
               </Col>
               <Col sm={2}>
                 <Button variant="primary" block onClick={() => {
+                    if(document.querySelector('input').value.trim() === ''){
+                      return
+                    }
                     let todo = document.querySelector('input').value
                     let todos = localStorage.getItem('todos') ? JSON.parse(localStorage.getItem('todos')) : []
                     todos.push(todo)
@@ -29,8 +36,16 @@ export default function App(){
       </Card>
       <br/>
       <Card>
-        <Card.Body>
-          <Card.Title>Todo List: </Card.Title>
+        <Card.Body
+          style={{
+            backgroundColor: '#f2f2f2'
+          }}
+        >
+          <br/>
+          <Card.Title style={{
+            textAlign: 'center',
+            fontSize: '2rem'
+          }}>Todo List:</Card.Title>
           <br/>
           <ListGroup>
               {
@@ -57,7 +72,6 @@ export default function App(){
           </ListGroup>
         </Card.Body>
       </Card>
-      <br/>
     </Container>
   )
 }
